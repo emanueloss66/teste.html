@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>I Love You Heart</title>
 
 <style>
@@ -12,12 +12,10 @@
     overflow: hidden;
     font-family: monospace;
   }
-
   canvas {
     display: block;
   }
 </style>
-
 </head>
 <body>
 
@@ -36,13 +34,11 @@
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
   }
-
   resize();
   window.addEventListener("resize", resize);
 
   let offset = 0;
 
-  // Iniciar música no primeiro toque
   document.body.addEventListener("touchstart", startMusic, { once: true });
   document.body.addEventListener("click", startMusic, { once: true });
 
@@ -51,7 +47,6 @@
     music.play();
   }
 
-  // Loop entre 1:45 e 1:55
   music.addEventListener("timeupdate", () => {
     if (music.currentTime >= 115) {
       music.currentTime = 105;
@@ -72,24 +67,30 @@
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
     ctx.fillStyle = "red";
-    ctx.font = "18px monospace";
+    ctx.font = "16px monospace";
 
     ctx.shadowColor = "red";
     ctx.shadowBlur = 25;
 
-    // Centro da tela para horizontal e vertical (garante centralização perfeita)
+    // Centro do canvas
     const centerX = canvas.width / 2;
     const centerY = canvas.height / 2;
 
-    // Escala adaptativa para deixar o coração proporcional em qualquer tela
-    const scale = Math.min(canvas.width, canvas.height) / 40;
+    // Ajuste fino para compensar o deslocamento horizontal (em pixels)
+    // Esse valor pode ser ajustado para garantir centralização visual
+    const horizontalCompensation = -12;
 
-    // Quantidade maior de frases para ficar mais denso
-    for (let i = 0; i < 160; i++) {
-      const t = i * 0.22 + offset;
+    // Escala proporcional para o tamanho do coração
+    const scale = Math.min(canvas.width, canvas.height) / 42;
+
+    const totalPhrases = 190;
+    const step = 0.18; // espaçamento entre as frases (quanto menor, mais próximas)
+
+    for (let i = 0; i < totalPhrases; i++) {
+      const t = i * step + offset;
       const p = heart(t);
 
-      const x = centerX + p.x * scale;
+      const x = centerX + p.x * scale + horizontalCompensation;
       const y = centerY - p.y * scale;
 
       ctx.fillText("I love you", x, y);
@@ -105,7 +106,3 @@
 
 </body>
 </html>
-</body>
-</html>
-
-
