@@ -44,7 +44,7 @@ window.addEventListener("resize", resize);
 
 let offset = 0;
 
-// iniciar música no primeiro toque
+// iniciar música
 document.body.addEventListener("touchstart", startMusic, {once:true});
 document.body.addEventListener("click", startMusic, {once:true});
 
@@ -53,7 +53,7 @@ music.currentTime = 105;
 music.play();
 }
 
-// loop da música
+// loop música
 music.addEventListener("timeupdate", () => {
 if(music.currentTime >= 115){
 music.currentTime = 105;
@@ -79,11 +79,10 @@ ctx.shadowBlur=20;
 let centerX;
 let centerY = canvas.height / 2;
 
-// posição ajustada para mobile
 if(canvas.width < 600){
-centerX = canvas.width * 0.3;
+centerX = canvas.width * 0.4; // mobile centralizado
 }else{
-centerX = canvas.width / 2;
+centerX = canvas.width / 2; // desktop
 }
 
 let scale = Math.min(canvas.width, canvas.height) / 45;
