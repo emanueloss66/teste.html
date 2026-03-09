@@ -76,9 +76,16 @@ ctx.font="16px monospace";
 ctx.shadowColor="red";
 ctx.shadowBlur=20;
 
-// centro da tela
-let centerX = canvas.width / 2;
+// posição do coração
+let centerX;
 let centerY = canvas.height / 2;
+
+// se for celular move para esquerda
+if(canvas.width < 600){
+centerX = canvas.width * 0.15;
+}else{
+centerX = canvas.width / 2;
+}
 
 // escala responsiva
 let scale = Math.min(canvas.width, canvas.height) / 45;
