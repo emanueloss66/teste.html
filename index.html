@@ -29,6 +29,7 @@ display:block;
 </audio>
 
 <script>
+
 const canvas = document.getElementById("c");
 const ctx = canvas.getContext("2d");
 const music = document.getElementById("music");
@@ -75,9 +76,12 @@ ctx.font="16px monospace";
 ctx.shadowColor="red";
 ctx.shadowBlur=20;
 
-// centro ajustado
+// centro da tela
 let centerX = canvas.width / 2;
-let centerY = canvas.height / 2.2;
+let centerY = canvas.height / 2;
+
+// escala responsiva
+let scale = Math.min(canvas.width, canvas.height) / 45;
 
 for(let i=0;i<200;i++){
 
@@ -88,8 +92,6 @@ let p = heart(t);
 if(Math.abs(p.x) < 2 && Math.abs(p.y) < 2){
 continue;
 }
-
-let scale = Math.min(canvas.width, canvas.height) / 38;
 
 let x = centerX + p.x * scale;
 let y = centerY - p.y * scale;
@@ -103,6 +105,7 @@ requestAnimationFrame(draw);
 }
 
 draw();
+
 </script>
 
 </body>
