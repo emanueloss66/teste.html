@@ -53,7 +53,7 @@ music.currentTime = 105;
 music.play();
 }
 
-// loop entre 1:45 e 1:55
+// loop da música
 music.addEventListener("timeupdate", () => {
 if(music.currentTime >= 115){
 music.currentTime = 105;
@@ -76,18 +76,16 @@ ctx.font="16px monospace";
 ctx.shadowColor="red";
 ctx.shadowBlur=20;
 
-// posição do coração
 let centerX;
 let centerY = canvas.height / 2;
 
-// se for celular move para esquerda
+// posição ajustada para mobile
 if(canvas.width < 600){
-centerX = canvas.width * 0.15;
+centerX = canvas.width * 0.3;
 }else{
 centerX = canvas.width / 2;
 }
 
-// escala responsiva
 let scale = Math.min(canvas.width, canvas.height) / 45;
 
 for(let i=0;i<200;i++){
