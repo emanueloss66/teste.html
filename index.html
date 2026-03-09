@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -6,17 +7,18 @@
 <title>I Love You Heart</title>
 
 <style>
-  body {
-    margin: 0;
-    background: black;
-    overflow: hidden;
-    font-family: monospace;
-  }
-  canvas {
-    display: block;
-  }
+body {
+  margin: 0;
+  background: black;
+  overflow: hidden;
+  font-family: monospace;
+}
+canvas {
+  display: block;
+}
 </style>
 </head>
+
 <body>
 
 <canvas id="c"></canvas>
@@ -64,28 +66,29 @@ function heart(t) {
 function draw() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-  ctx.fillStyle = "red";
+  // vermelho cereja
+  ctx.fillStyle = "#D2042D";
   ctx.font = "16px monospace";
-  ctx.shadowColor = "red";
+  ctx.shadowColor = "#D2042D";
   ctx.shadowBlur = 20;
 
   const centerY = canvas.height / 2;
   const centerX = canvas.width / 2;
 
-  // escala menor para reduzir o tamanho do coração
   const scale = Math.min(canvas.width, canvas.height) / 45;
 
-  const totalPhrases = 185;
-  const step = 0.20;
+  const totalPhrases = 150;
 
-  // deslocamento horizontal entre a metade da esquerda e o centro
-  const horizontalOffset = centerX * 0.25; // 25% do centro → mais à esquerda
+  // distribuição perfeitamente uniforme
+  const step = (Math.PI * 2) / totalPhrases;
+
+  const horizontalOffset = centerX * 0.25;
 
   for (let i = 0; i < totalPhrases; i++) {
     const t = i * step + offset;
     const p = heart(t);
 
-    const x = centerX - horizontalOffset + p.x * scale; // deslocado para a esquerda
+    const x = centerX - horizontalOffset + p.x * scale;
     const y = centerY - p.y * scale;
 
     ctx.fillText("I love you", x, y);
