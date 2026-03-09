@@ -26,85 +26,75 @@
 </audio>
 
 <script>
-  const canvas = document.getElementById("c");
-  const ctx = canvas.getContext("2d");
-  const music = document.getElementById("music");
+const canvas = document.getElementById("c");
+const ctx = canvas.getContext("2d");
+const music = document.getElementById("music");
 
-  function resize() {
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-  }
-  resize();
-  window.addEventListener("resize", resize);
+function resize() {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+}
+resize();
+window.addEventListener("resize", resize);
 
-  let offset = 0;
+let offset = 0;
 
-  document.body.addEventListener("touchstart", startMusic, { once: true });
-  document.body.addEventListener("click", startMusic, { once: true });
+// iniciar música
+document.body.addEventListener("touchstart", startMusic, {once:true});
+document.body.addEventListener("click", startMusic, {once:true});
 
-  function startMusic() {
+function startMusic() {
+  music.currentTime = 105;
+  music.play();
+}
+
+// loop música
+music.addEventListener("timeupdate", () => {
+  if (music.currentTime >= 115) {
     music.currentTime = 105;
-    music.play();
+  }
+});
+
+function heart(t) {
+  const x = 16 * Math.pow(Math.sin(t), 3);
+  const y = 13 * Math.cos(t) - 5*Math.cos(2*t) - 2*Math.cos(3*t) - Math.cos(4*t);
+  return {x, y};
+}
+
+function draw() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  ctx.fillStyle = "red";
+  ctx.font = "18px monospace";
+  ctx.shadowColor = "red";
+  ctx.shadowBlur = 20;
+
+  const centerX = canvas.width / 2;
+  const centerY = canvas.height / 2;
+
+  // escala menor para coração menor
+  const scale = Math.min(canvas.width, canvas.height) / 60;
+
+  const totalPhrases = 120; // menos frases para legibilidade
+  const step = 0.25;        // espaçamento maior para ficar limpo
+
+  for (let i = 0; i < totalPhrases; i++) {
+    const t = i * step + offset;
+    const p = heart(t);
+
+    const x = centerX + p.x * scale;
+    const y = centerY - p.y * scale;
+
+    ctx.fillText("I love you", x, y);
   }
 
-  music.addEventListener("timeupdate", () => {
-    if (music.currentTime >= 115) {
-      music.currentTime = 105;
-    }
-  });
+  offset += 0.003;
 
-  function heart(t) {
-    const x = 16 * Math.pow(Math.sin(t), 3);
-    const y =
-      13 * Math.cos(t) -
-      5 * Math.cos(2 * t) -
-      2 * Math.cos(3 * t) -
-      Math.cos(4 * t);
-    return { x, y };
-  }
+  requestAnimationFrame(draw);
+}
 
-  function draw() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-    ctx.fillStyle = "red";
-    ctx.font = "16px monospace";
-
-    ctx.shadowColor = "red";
-    ctx.shadowBlur = 25;
-
-    // Centro do canvas
-    const centerX = canvas.width / 2;
-    const centerY = canvas.height / 2;
-
-    // Ajuste fino para compensar o deslocamento horizontal (em pixels)
-    // Esse valor pode ser ajustado para garantir centralização visual
-    const horizontalCompensation = -60;
-
-    // Escala proporcional para o tamanho do coração
-    const scale = Math.min(canvas.width, canvas.height) / 42;
-
-    const totalPhrases = 190;
-    const step = 0.18; // espaçamento entre as frases (quanto menor, mais próximas)
-
-    for (let i = 0; i < totalPhrases; i++) {
-      const t = i * step + offset;
-      const p = heart(t);
-
-      const x = centerX + p.x * scale + horizontalCompensation;
-      const y = centerY - p.y * scale;
-
-      ctx.fillText("I love you", x, y);
-    }
-
-    offset += 0.004;
-
-    requestAnimationFrame(draw);
-  }
-
-  draw();
+draw();
 </script>
 
 </body>
 </html>
-
-
