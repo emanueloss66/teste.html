@@ -69,30 +69,24 @@ function draw(){
 ctx.clearRect(0,0,canvas.width,canvas.height);
 
 ctx.fillStyle="red";
-ctx.font="16px monospace";
+ctx.font="18px monospace";
 
 ctx.shadowColor="red";
-ctx.shadowBlur=20;
+ctx.shadowBlur=25;
 
+// centro perfeito
 let centerX = canvas.width / 2;
 let centerY = canvas.height / 2;
 
-// ajuste fino para mobile
-if(canvas.width < 600){
-centerX += canvas.width * 0.08;
-}
+// escala responsiva
+let scale = Math.min(canvas.width, canvas.height) / 40;
 
-let scale = Math.min(canvas.width, canvas.height) / 45;
+// menos frases
+for(let i=0;i<120;i++){
 
-for(let i=0;i<200;i++){
-
-let t = (i*0.2) + offset;
+let t = (i*0.25) + offset;
 
 let p = heart(t);
-
-if(Math.abs(p.x) < 2 && Math.abs(p.y) < 2){
-continue;
-}
 
 let x = centerX + p.x * scale;
 let y = centerY - p.y * scale;
@@ -100,7 +94,7 @@ let y = centerY - p.y * scale;
 ctx.fillText("I love you",x,y);
 }
 
-offset += 0.005;
+offset += 0.004;
 
 requestAnimationFrame(draw);
 }
@@ -111,3 +105,7 @@ draw();
 
 </body>
 </html>
+
+</body>
+</html>
+
