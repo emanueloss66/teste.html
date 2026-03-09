@@ -69,14 +69,20 @@ function draw() {
   ctx.shadowColor = "red";
   ctx.shadowBlur = 20;
 
-  const centerX = canvas.width / 2;
+  // Centro vertical
   const centerY = canvas.height / 2;
 
-  // escala menor para coração menor
-  const scale = Math.min(canvas.width, canvas.height) / 60;
+  // Deslocamento horizontal: se mobile, colocar mais à esquerda
+  let centerX;
+  if (canvas.width < 600) {
+    centerX = canvas.width * 0.25; // 25% da largura → esquerda
+  } else {
+    centerX = canvas.width / 2; // Desktop continua centralizado
+  }
 
-  const totalPhrases = 200; // menos frases para legibilidade
-  const step = 0.25;        // espaçamento maior para ficar limpo
+  const scale = Math.min(canvas.width, canvas.height) / 60;
+  const totalPhrases = 185; // legível
+  const step = 0.25;        // espaçamento maior
 
   for (let i = 0; i < totalPhrases; i++) {
     const t = i * step + offset;
@@ -89,7 +95,6 @@ function draw() {
   }
 
   offset += 0.003;
-
   requestAnimationFrame(draw);
 }
 
@@ -98,4 +103,7 @@ draw();
 
 </body>
 </html>
+</body>
+</html>
+
 
