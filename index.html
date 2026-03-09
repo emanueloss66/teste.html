@@ -66,9 +66,8 @@ function heart(t) {
 function draw() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-  // vermelho cereja
   ctx.fillStyle = "#D2042D";
-  ctx.font = "16px monospace";
+  ctx.font = "18px monospace";
   ctx.shadowColor = "#D2042D";
   ctx.shadowBlur = 20;
 
@@ -77,9 +76,9 @@ function draw() {
 
   const scale = Math.min(canvas.width, canvas.height) / 45;
 
-  const totalPhrases = 150;
+  // MENOS FRASES = MAIS ESPAÇO ENTRE ELAS
+  const totalPhrases = 70;
 
-  // distribuição perfeitamente uniforme
   const step = (Math.PI * 2) / totalPhrases;
 
   const horizontalOffset = centerX * 0.25;
