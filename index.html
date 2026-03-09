@@ -2,9 +2,7 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>I Love You Heart</title>
 
 <style>
@@ -45,12 +43,12 @@ window.addEventListener("resize", resize);
 
 let offset = 0;
 
-// iniciar música no primeiro toque (necessário no mobile)
+// iniciar música no primeiro toque
 document.body.addEventListener("touchstart", startMusic, {once:true});
 document.body.addEventListener("click", startMusic, {once:true});
 
 function startMusic(){
-music.currentTime = 105; // começa em 1:45
+music.currentTime = 105;
 music.play();
 }
 
@@ -72,10 +70,14 @@ function draw(){
 ctx.clearRect(0,0,canvas.width,canvas.height);
 
 ctx.fillStyle="red";
-ctx.font="14px monospace";
+ctx.font="16px monospace";
 
 ctx.shadowColor="red";
 ctx.shadowBlur=20;
+
+// centro ajustado
+let centerX = canvas.width / 2;
+let centerY = canvas.height / 2.2;
 
 for(let i=0;i<200;i++){
 
@@ -87,10 +89,10 @@ if(Math.abs(p.x) < 2 && Math.abs(p.y) < 2){
 continue;
 }
 
-let scale = Math.min(canvas.width, canvas.height) / 40;
+let scale = Math.min(canvas.width, canvas.height) / 38;
 
-let x = canvas.width/2 + p.x*scale;
-let y = canvas.height/2 - p.y*scale;
+let x = centerX + p.x * scale;
+let y = centerY - p.y * scale;
 
 ctx.fillText("I love you",x,y);
 }
