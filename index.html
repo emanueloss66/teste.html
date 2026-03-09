@@ -65,30 +65,28 @@ function draw() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 
   ctx.fillStyle = "red";
-  ctx.font = "18px monospace";
+  ctx.font = "16px monospace";
   ctx.shadowColor = "red";
   ctx.shadowBlur = 20;
 
-  // Centro vertical
+  // centro vertical
   const centerY = canvas.height / 2;
 
-  // Deslocamento horizontal: se mobile, colocar mais à esquerda
-  let centerX;
-  if (canvas.width < 600) {
-    centerX = canvas.width * 0.25; // 25% da largura → esquerda
-  } else {
-    centerX = canvas.width / 2; // Desktop continua centralizado
-  }
+  // centro horizontal inicial
+  const centerX = canvas.width / 2;
 
-  const scale = Math.min(canvas.width, canvas.height) / 60;
-  const totalPhrases = 185; // legível
-  const step = 0.25;        // espaçamento maior
+  // escala para ocupar metade da tela
+  const scale = Math.min(canvas.width, canvas.height) / 35;
+
+  const totalPhrases = 185;
+  const step = 0.20;
 
   for (let i = 0; i < totalPhrases; i++) {
     const t = i * step + offset;
     const p = heart(t);
 
-    const x = centerX + p.x * scale;
+    // deslocar para a esquerda metade da tela
+    const x = centerX/2 + p.x * scale;
     const y = centerY - p.y * scale;
 
     ctx.fillText("I love you", x, y);
@@ -103,7 +101,3 @@ draw();
 
 </body>
 </html>
-</body>
-</html>
-
-
