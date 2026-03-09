@@ -69,24 +69,23 @@ function draw() {
   ctx.shadowColor = "red";
   ctx.shadowBlur = 20;
 
-  // centro vertical
   const centerY = canvas.height / 2;
-
-  // centro horizontal inicial
   const centerX = canvas.width / 2;
 
-  // escala para ocupar metade da tela
-  const scale = Math.min(canvas.width, canvas.height) / 35;
+  // escala menor para reduzir o tamanho do coração
+  const scale = Math.min(canvas.width, canvas.height) / 45;
 
   const totalPhrases = 185;
   const step = 0.20;
+
+  // deslocamento horizontal entre a metade da esquerda e o centro
+  const horizontalOffset = centerX * 0.25; // 25% do centro → mais à esquerda
 
   for (let i = 0; i < totalPhrases; i++) {
     const t = i * step + offset;
     const p = heart(t);
 
-    // deslocar para a esquerda metade da tela
-    const x = centerX/2 + p.x * scale;
+    const x = centerX - horizontalOffset + p.x * scale; // deslocado para a esquerda
     const y = centerY - p.y * scale;
 
     ctx.fillText("I love you", x, y);
